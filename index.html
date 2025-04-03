@@ -40,6 +40,7 @@
     <!-- Favicon & Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="icon" href="https://www.v9s9r.com/V9S9R.ico" type="image/png">
+    <link rel="canonical" href="https://www.v9s9r.com">
 
     <!-- Styles -->
     <style>
@@ -48,7 +49,7 @@
             height: 100vh;
             margin: 0;
             background-color: black;
-            color: white;
+            color: rgba(255, 255, 255, 0.95);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -56,6 +57,12 @@
             overflow: hidden;
             flex-direction: column;
             position: relative;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         h1 {
             font-size: 20px;
@@ -67,10 +74,11 @@
             text-decoration: none;
             color: white;
             font-weight: 700;
-            transition: text-decoration 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
         }
         a:hover {
             text-decoration: underline;
+            color: #ffdd57;
         }
     </style>
 </head>
