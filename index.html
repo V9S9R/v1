@@ -38,4 +38,61 @@
 
     <!-- Preload Font -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap" as="style">
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap" rel="
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
+    <!-- Styles -->
+    <style>
+        html {
+            font-display: swap;
+        }
+        body {
+            font-family: 'Comfortaa', Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
+            background-color: black;
+            color: rgba(255, 255, 255, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            flex-direction: column;
+            position: relative;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        h1 {
+            font-size: 20px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            transition: all 0.3s ease-in-out;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #ffdd57;
+            opacity: 0.8;
+        }
+        @media print {
+            body {
+                background-color: black;
+                color: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 aria-label="Hey! Let's connect on LinkedIn">
+        hey! let's connect on <a href="https://linkedin.com/in/v9s9r" target="_blank" rel="noopener" aria-label="Visit my LinkedIn profile">LinkedIn</a>
+    </h1>
+</body>
+</html>
