@@ -39,7 +39,6 @@
         a {
             text-decoration: underline;
             color: white;
-            font-weight: 700;
             transition: all 0.3s ease-in-out;
         }
         a:hover {
@@ -71,13 +70,19 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         
-        const stars = Array.from({ length: 100 }, () => ({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            radius: Math.random() * 2 + 1,
-            alpha: Math.random(),
-            speed: Math.random() * 0.02 + 0.01
-        }));
+        let stars = Array.from({ length: 100 }, () => createStar());
+
+        function createStar(x = Math.random() * canvas.width, y = Math.random() * canvas.height) {
+            return {
+                x,
+                y,
+                radius: Math.random() * 2 + 1,
+                alpha: Math.random(),
+                speed: Math.random() * 0.02 + 0.01,
+                vx: (Math.random() - 0.5) * 0.2, // Slow movement in x direction
+                vy: (Math.random() - 0.5) * 0.2  // Slow movement in y direction
+            };
+        }
         
         function drawStars() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -95,6 +100,14 @@
                 if (star.alpha <= 0.2 || star.alpha >= 1) {
                     star.speed *= -1;
                 }
+                
+                // Move the stars slowly
+                star.x += star.vx;
+                star.y += star.vy;
+                
+                // Keep stars within bounds
+                if (star.x < 0 || star.x > canvas.width) star.vx *= -1;
+                if (star.y < 0 || star.y > canvas.height) star.vy *= -1;
             });
             drawStars();
             requestAnimationFrame(animateStars);
@@ -102,6 +115,24 @@
         
         drawStars();
         animateStars();
+        
+        canvas.addEventListener("mousemove", (event) => {
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+            for (let i = 0; i < stars.length; i++) {
+                const star = stars[i];
+                const dx = mouseX - star.x;
+                const dy = mouseY - star.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 20) {
+                    const multiplier = Math.floor(Math.random() * 4) + 2; // Random between 2 and 5
+                    for (let j = 0; j < multiplier; j++) {
+                        stars.push(createStar(star.x, star.y));
+                    }
+                    break; // Only affect the first hovered star
+                }
+            }
+        });
         
         window.addEventListener("resize", () => {
             canvas.width = window.innerWidth;
