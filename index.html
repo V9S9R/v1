@@ -7,7 +7,7 @@
     <meta name="description" content="hey...let's connect and build something great!">
     <meta name="keywords" content="V9S9R, Vishwajeet Singh Parmar, Vishwajeet, Vishwajeet Parmar">
     <meta name="author" content="Vishwajeet Parmar">
-    
+
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Vishwajeet Parmar">
     <meta property="og:description" content="hey...let's connect and build something great!">
@@ -17,12 +17,12 @@
     <meta property="og:url" content="https://www.v9s9r.com">
     <meta property="og:type" content="profile">
     <meta property="og:site_name" content="V9S9R">
-    
+
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@v9s9r">
     <meta name="twitter:creator" content="@v9s9r">
-    
+
     <!-- Security -->
     <meta http-equiv="X-Frame-Options" content="DENY">
 
@@ -80,7 +80,7 @@
         }
         h1 {
             font-size: clamp(18px, 5vw, 26px);
-            font-weight: 700;
+            font-weight: 500;
             letter-spacing: 0.5px;
             opacity: 0.9;
             z-index: 2;
@@ -136,9 +136,9 @@
                 y,
                 radius: Math.random() * 2 + 1,
                 alpha: Math.random() * 0.6 + 0.4,
-                speed: Math.random() * 0.02 + 0.01,
-                vx: (Math.random() - 0.5) * 0.1, 
-                vy: (Math.random() - 0.5) * 0.1
+                speed: (Math.random() * 0.02 + 0.01) * 1.5625,
+                vx: (Math.random() - 0.5) * 0.15625, 
+                vy: (Math.random() - 0.5) * 0.15625
             };
         }
 
@@ -187,10 +187,19 @@
                         }, 500));
                     }
                 } else {
-                    clearTimeout(hoverTimers.get(star));
-                    hoverTimers.delete(star);
+                    if (hoverTimers.has(star)) {
+                        clearTimeout(hoverTimers.get(star));
+                        hoverTimers.delete(star);
+                    }
                 }
             });
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s") {
+                e.preventDefault();
+                window.location.href = "https://superprofile.v9s9r.com";
+            }
         });
     </script>
 </body>
